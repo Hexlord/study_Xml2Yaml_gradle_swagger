@@ -1,37 +1,40 @@
-# XML to YAML Converter
+# XMLtoYAML
 
-Very powerful and easy to use XML to YAML converter service. It's written in Java 10 using Spring Boot framework.
+## About
+This web service converts XML input to YAML output
+It is implemented using Java and Spring Boot framework
+
+API description is provided through swagger and is available on `/swagger-ui.html`.
 
 ## Example
 
 The service has controller handling POST request to `/convert` with body containing XML:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<note>
-    <to>Tove</to>
-    <from>Jani</from>
-    <heading>Reminder</heading>
-    <body>Don't forget me this weekend!</body>
-</note>
+<document>
+    <author>Alexander</author>
+    <secrecy>Absolutely secret</secrecy>
+    <access>Denied</access>
+</document>
 ```
 
 and sends response in YAML format matching the request:
 ```yaml
-note:
-  to: "Tove"
-  from: "Jani"
-  heading: "Reminder"
-  body: "Don't forget me this weekend!"
+document:
+  author: "Alexander"
+  secrecy: "Absolutely secret"
+  access: "Denied"
+
 ```
 
 ## Usage 
 
-To create Docker image run Gradle task:
+1. Create docker image
 
-`$ ./gradlew docker`
+`gradlew docker`
 
-After that Docker container can be run with optional port parameter (default is 8080):
+2. Run it with the script
 
-`$ ./run.sh <PORT>`
+`run.cmd`
 
-Swagger API description is available on `/swagger-ui.html` and `/v2/api-docs`.
+

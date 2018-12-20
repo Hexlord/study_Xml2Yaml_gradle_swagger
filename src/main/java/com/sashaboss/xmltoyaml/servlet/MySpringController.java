@@ -47,8 +47,8 @@ public class MySpringController {
                     required = true,
                     examples = @Example(
                             @ExampleProperty(
-                                    mediaType = "application/json",
-                                    value = "<note><to>Tove</to><heading>Reminder</heading><body>Don't forget me this weekend!</body></note>"
+                                    mediaType = "application/xml",
+                                    value = "<example><somefield>some value</somefield></example>"
                             )
                     )
             )
