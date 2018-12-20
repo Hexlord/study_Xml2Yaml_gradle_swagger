@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+    }
+}
+
+plugins {
+    id "java"
+    id "idea"
+    id "org.springframework.boot" version "2.1.1.RELEASE"
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "com.palantir.docker" version "0.20.1"
+}
+
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+group 'com.sashaboss'
+version '0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+bootJar {
+    baseName = 'xmltoyaml'
+    version = version
+}
+
+task unpack(type: Copy) {
+    dependsOn bootJar
+    from(zipTree(tasks.bootJar.outputs.files.singleFile))
+    into("build/dependency")
+}
+
+docker {
+    name "${project.group}/${bootJar.baseName}"
+    copySpec.from(tasks.unpack.outputs).into("dependency")
+    buildArgs(['DEPENDENCY': "dependency"])
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    // Serialization
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
+    compile("com.github.DinoChiesa:deserialize-xml-arrays-jackson:master")
+
+    // Swagger
+    compile("io.springfox:springfox-swagger2:2.9.2")
+    compile("io.springfox:springfox-swagger-ui:2.9.2")
+
+    // Testing
+    testCompile("junit:junit:4.12")
+    testCompile("commons-io:commons-io:2.6")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+
