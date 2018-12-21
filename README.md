@@ -29,7 +29,7 @@ document:
 
 ## Usage 
 
-1. Create docker image
+1. Create docker image (make sure you have root/administrator privileges)
 
 `gradlew docker`
 
