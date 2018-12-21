@@ -22,6 +22,9 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Example;
 import io.swagger.annotations.ExampleProperty;
 
+/**
+ * Provides web controllers for the xml_to_yaml api
+ */
 @Api
 @RestController
 public class MySpringController {
@@ -29,6 +32,13 @@ public class MySpringController {
     @Autowired
     private MyService service;
 
+    /**
+     * Controller for XML to YAML conversion requests
+     *
+     * @param sXml - input XML to be converted
+     * @return YAML output when possible together with HTTP code
+     * matching occurred exception or 200 if okay.
+     */
     @ApiOperation(value = "This tool converts XML string to YAML string")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Successfully converted XML to YAML"),

@@ -20,6 +20,9 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.xmldeser.ArrayInferringUntypedObjectDeserializer;
 import com.google.xmldeser.RootSniffingXMLStreamReader;
 
+/**
+ * Provides functionality for XML to YAML conversion
+ */
 @Service
 public class MyService {
 
@@ -27,6 +30,10 @@ public class MyService {
 
     private final YAMLMapper yamlMapper;
 
+    /**
+     * Creates a new service with instances of XML and YAML mappers
+     * provided by Jackson
+     */
     public MyService() {
         // create jackson xml mapper receiving object
         xmlMapper = new XmlMapper();
@@ -39,7 +46,7 @@ public class MyService {
     }
 
     /**
-     * Convert XML string into element map
+     * Converts XML string into element map
      *
      * @param sXml - XML string
      * @return element map
@@ -61,7 +68,7 @@ public class MyService {
     }
 
     /**
-     * Convert element map to YAML string
+     * Converts element map to YAML string
      *
      * @param map - map to be converted
      * @return YAML string
